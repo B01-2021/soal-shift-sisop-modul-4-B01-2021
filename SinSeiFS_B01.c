@@ -8,8 +8,8 @@
 #include <errno.h>
 #include <sys/time.h>
 
-static  const  char *dir_path = "/home/[user]/Downloads";
-char *log_path = "/home/[user]/SinSeiFS.log";
+static  const  char *dir_path = "/home/finesa/Downloads";
+char *log_path = "/home/finesa/SinSeiFS.log";
 char caesar[100] = "9(ku@AW1[Lmvgax6q`5Y2Ry?+sF!^HKQiBXCUSe&0M.b%rI'7d)o4~VfZ*{#:}ETt$3J-zpc]lnh8,GwP_ND|jO9(ku@AW1[L";
 
 void write_log(char *level, char *cmd_desc)
@@ -57,16 +57,16 @@ void encrypt(char *src)
     if(src[i] == '/')
       continue;
 
-    // int caesar_index = 0;
-    // while(1)
-    // {
-    //   if(src[i] == caesar[caesar_index])
-    //   {
-    //     src[i] = caesar[caesar_index + 10];
-    //     break;
-    //   }
-    //   caesar_index++;
-    // }
+    int caesar_index = 0;
+    while(1)
+    {
+      if(src[i] == caesar[caesar_index])
+      {
+        src[i] = caesar[caesar_index + 10];
+        break;
+      }
+      caesar_index++;
+    }
   }
 }
 
@@ -98,16 +98,16 @@ void decrypt(char *src)
     if(src[i] == '/')
       continue;
 
-    // int caesar_index = strlen(caesar) - 1;
-    // while(1)
-    // {
-    //   if(src[i] == caesar[caesar_index])
-    //   {
-    //     src[i] = caesar[caesar_index - 10];
-    //     break;
-    //   }
-    //   caesar_index--;
-    // }
+    int caesar_index = strlen(caesar) - 1;
+    while(1)
+    {
+      if(src[i] == caesar[caesar_index])
+      {
+        src[i] = caesar[caesar_index - 10];
+        break;
+      }
+      caesar_index--;
+    }
   }
 }
 

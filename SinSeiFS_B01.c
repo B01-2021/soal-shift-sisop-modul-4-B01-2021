@@ -31,83 +31,39 @@ void write_log(char *level, char *cmd_desc)
   fclose(fp);
 }
 
-void encrypt(char *src) 
+void encrypt(char *str) 
 {
-  int len = strlen(src);
-  int start = 0;
-
-  for (int i = strlen(src); i >= 0; i--) 
+  int i = 0;
+  while(str[i]!='\0')
   {
-    if(src[i] == '/')
-      break;
-
-    if(src[i] == '.')
+    if(!((str[i]>=0&&str[i]<65)||(str[i]>90&&str[i]<97)||(str[i]>122&&str[i]<=127)))
     {
-      len = i - 1;
-      break;
-    }
-  }
-
-  for (int i = 1; i < len; i++)
-    if (src[i] == '/')
-      start = i;
-
-  for (int i = start; i <= len; i++) 
-  {
-    if(src[i] == '/')
-      continue;
-
-    // int caesar_index = 0;
-    // while(1)
-    // {
-    //   if(src[i] == caesar[caesar_index])
-    //   {
-    //     src[i] = caesar[caesar_index + 10];
-    //     break;
-    //   }
-    //   caesar_index++;
-    // }
+      if(str[i]>='A'&&str[i]<='Z')
+        str[i]='Z'+'A'-str[i];
+      if(str[i]>='a'&&str[i]<='z')
+        str[i]='z'+'a'-str[i];
+    } 
+    if(((str[i]>=0&&str[i]<65)||(str[i]>90&&str[i]<97)||(str[i]>122&&str[i]<=127)))
+       continue;
+    i++;
   }
 }
 
-void decrypt(char *src) 
+void decrypt(char *str) 
 {
-  int len = strlen(src); 
-  int start = 0;
-    
-  for (int i = 1; i < len; i++)
+  int i = 0;
+  while(str[i]!='\0')
   {
-    if(src[i] == '/' || src[i + 1] == '\0') 
+    if(!((str[i]>=0&&str[i]<65)||(str[i]>90&&str[i]<97)||(str[i]>122&&str[i]<=127)))
     {
-      start = i + 1;
-      break;
-    }
-  }
-
-  for (int i = strlen(src); i >= 0; i--)
-  {
-    if (src[i] == '.') 
-    {
-      len = i - 1;
-      break;
-    }
-  }
-
-  for (int i = start; i <= len; i++) 
-  {
-    if(src[i] == '/')
-      continue;
-
-    // int caesar_index = strlen(caesar) - 1;
-    // while(1)
-    // {
-    //   if(src[i] == caesar[caesar_index])
-    //   {
-    //     src[i] = caesar[caesar_index - 10];
-    //     break;
-    //   }
-    //   caesar_index--;
-    // }
+      if(str[i]>='A'&&str[i]<='Z')
+        str[i]='Z'+'A'-str[i];
+      if(str[i]>='a'&&str[i]<='z')
+        str[i]='z'+'a'-str[i];
+    } 
+    if(((str[i]>=0&&str[i]<65)||(str[i]>90&&str[i]<97)||(str[i]>122&&str[i]<=127)))
+       continue;
+    i++;
   }
 }
 
